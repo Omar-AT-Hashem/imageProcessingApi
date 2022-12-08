@@ -1,6 +1,6 @@
 // import supertest from 'supertest';
 // import app from '../index';
-import { testFunc } from "../index";
+
 
 // const request = supertest(app);
 // describe('Test endpoint responses', () => {
@@ -11,6 +11,4 @@ import { testFunc } from "../index";
 //     }
 // )});
 
-it("should multiply a number by 5", () => {
-  expect(testFunc(5)).toEqual(25);
-});
+

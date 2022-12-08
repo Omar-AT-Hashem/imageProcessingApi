@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 
 const app = express();
 
@@ -7,6 +7,5 @@ export function testFunc(num: number): number {
 }
 
 export default {
-  app,
-  testFunc,
+  app
 };
