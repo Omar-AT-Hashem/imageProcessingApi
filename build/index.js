@@ -11,6 +11,5 @@ function testFunc(num) {
 }
 exports.testFunc = testFunc;
 exports.default = {
-    app: app,
-    testFunc: testFunc,
+    app: app
 };

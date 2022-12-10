@@ -1,11 +1,16 @@
 import express from 'express';
+import api from './routes/index'
 
 const app = express();
 
-export function testFunc(num: number): number {
-  return num * 5;
-}
+const PORT = process.env.PORT || 3000;
 
-export default {
-  app
-};
+app.get('/', (req, res) => {
+  res.send('main page');
+});
+
+app.use('/api', api)
+
+app.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`);
+})
