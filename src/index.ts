@@ -1,10 +1,10 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import routes from './routes/index';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT: string | number = process.env.PORT || 3000;
 
-app.get('/', (req, res):void => {
+app.get('/', (req:Request, res:Response):void => {
   res.send('main page');
 });
 

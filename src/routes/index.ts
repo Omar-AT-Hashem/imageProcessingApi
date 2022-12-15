@@ -1,9 +1,9 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import imageProcessor from './api/imageProcessor';
 
 const routes = express.Router();
 
-routes.get('/', (req, res):void => {
+routes.get('/', (req:Request, res:Response):void => {
   res.status(200).send('main api route');
 });
 
