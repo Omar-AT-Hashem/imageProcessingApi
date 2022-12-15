@@ -17,20 +17,15 @@ async function resizer(
     `${fileName}_${width}x${height}.jpg`
   );
 
- const resizedImagesFolder = path.join(
-    __dirname,
-    '..',
-    '..',
-    'resizedImages'
- )
+  const resizedImagesFolder = path.join(__dirname, '..', '..', 'resizedImages');
 
- //creates a folder for the resized images if it doesnt exist
- try {
-    await fs.access(resizedImagesFolder)
- }catch(err){
-    fs.mkdir(resizedImagesFolder)
- }
-//creates the resized image if it doesnt exist
+  //creates a folder for the resized images if it doesnt exist
+  try {
+    await fs.access(resizedImagesFolder);
+  } catch (err) {
+    fs.mkdir(resizedImagesFolder);
+  }
+  //creates the resized image if it doesnt exist
   try {
     await fs.access(resizedImage);
   } catch (err) {

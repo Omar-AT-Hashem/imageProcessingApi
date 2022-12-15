@@ -14,6 +14,4 @@ app.use('/api', index_1.default);
 app.listen(PORT, function () {
     console.log("Running on port ".concat(PORT));
 });
-exports.default = {
-    app: app
-};
+exports.default = app;

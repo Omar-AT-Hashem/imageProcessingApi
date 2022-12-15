@@ -4,7 +4,7 @@ import imageProcessor from './api/imageProcessor';
 const routes = express.Router();
 
 routes.get('/', (req, res) => {
-  res.send('main api route');
+  res.status(200).send('main api route');
 });
 
 routes.use('/imageProcessor', imageProcessor);
