@@ -1,8 +1,6 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // import supertest from 'supertest';
 // import app from '../index';
-var index_1 = require("../index");
 // const request = supertest(app);
 // describe('Test endpoint responses', () => {
 //     it('gets the api endpoint', async (done) => {
@@ -11,6 +9,3 @@ var index_1 = require("../index");
 //         done();
 //     }
 // )});
-it("should multiply a number by 5", function () {
-    expect((0, index_1.testFunc)(5)).toEqual(25);
-});
