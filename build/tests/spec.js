@@ -41,6 +41,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var supertest_1 = __importDefault(require("supertest"));
 var index_1 = __importDefault(require("../index"));
+var path_1 = __importDefault(require("path"));
+var fs_1 = __importDefault(require("fs"));
+var resizer_1 = __importDefault(require("../utilities/resizer"));
 var request = (0, supertest_1.default)(index_1.default);
 describe('1 Test endpoint responses', function () {
     it('gets the api endpoint', function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -56,7 +59,7 @@ describe('1 Test endpoint responses', function () {
         });
     }); });
 });
-describe('2 Test input validators', function () {
+describe('2 Test  input validators', function () {
     describe('2.1 tests fileName input validator', function () {
         it('2.1.1 invalid input', function () { return __awaiter(void 0, void 0, void 0, function () {
             var response;
@@ -70,33 +73,54 @@ describe('2 Test input validators', function () {
                 }
             });
         }); });
-    });
-    describe('2.2 tests width input validator', function () {
-        it('2.2.1 invalid input', function () { return __awaiter(void 0, void 0, void 0, function () {
-            var response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, request.get('/api/imageProcessor?fileName=fjord&width=-4&height=200')];
-                    case 1:
-                        response = _a.sent();
-                        expect(response.status).toBe(400);
-                        return [2 /*return*/];
-                }
+        describe('2.2 tests width input validator', function () {
+            it('2.2.1 invalid input', function () { return __awaiter(void 0, void 0, void 0, function () {
+                var response;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, request.get('/api/imageProcessor?fileName=fjord&width=-4&height=200')];
+                        case 1:
+                            response = _a.sent();
+                            expect(response.status).toBe(400);
+                            return [2 /*return*/];
+                    }
+                });
+            }); });
+            describe('2.3 tests height input validator', function () {
+                it('2.3.1 invalid input', function () { return __awaiter(void 0, void 0, void 0, function () {
+                    var response;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, request.get('/api/imageProcessor?fileName=fjord&width=200&height=-4')];
+                            case 1:
+                                response = _a.sent();
+                                expect(response.status).toBe(400);
+                                return [2 /*return*/];
+                        }
+                    });
+                }); });
             });
-        }); });
+        });
     });
-    describe('2.3 tests height input validator', function () {
-        it('2.3.1 invalid input', function () { return __awaiter(void 0, void 0, void 0, function () {
-            var response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, request.get('/api/imageProcessor?fileName=fjord&width=200&height=-4')];
-                    case 1:
-                        response = _a.sent();
-                        expect(response.status).toBe(400);
-                        return [2 /*return*/];
-                }
-            });
-        }); });
-    });
+});
+describe('3 test image processing', function () {
+    var width = 500;
+    var height = 500;
+    var resizedImage = path_1.default.join(__dirname, '..', '..', 'resizedImages', "fjord_".concat(width, "x").concat(height, ".jpg"));
+    it('3.1 processed image', function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (fs_1.default.existsSync(resizedImage)) {
+                        fs_1.default.unlinkSync(resizedImage);
+                    }
+                    return [4 /*yield*/, (0, resizer_1.default)("fjord", width, height)];
+                case 1:
+                    _a.sent();
+                    expect(fs_1.default.existsSync(resizedImage)).toBe(true);
+                    fs_1.default.unlinkSync(resizedImage);
+                    return [2 /*return*/];
+            }
+        });
+    }); });
 });

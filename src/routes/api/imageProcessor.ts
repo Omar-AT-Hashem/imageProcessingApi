@@ -3,7 +3,7 @@ import resizer from '../../utilities/resizer';
 
 const imageProcessor = express.Router();
 
-imageProcessor.get('/', async (req: Request, res: Response) => {
+imageProcessor.get('/', async (req: Request, res: Response):Promise<void> => {
   const fileName = req.query.fileName as string;
   const width: number = parseInt(req.query.width as string);
   const height: number = parseInt(req.query.height as string);
